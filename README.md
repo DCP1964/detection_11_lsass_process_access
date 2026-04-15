@@ -140,7 +140,7 @@ index=main
 ```
 Figure 3: Aggregated LSASS access events grouped by SourceImage, establishing baseline system behavior and identifying dominant processes interacting with LSASS prior to anomaly filtering.
 
-![LSASS Baseline Analysis](../screenshots/detection11/03_lsass_baseline.png)
+![LSASS Baseline Analysis](screenshots/detection11/03_lsass_baseline.png)
 
 
 - **What this step does:**\
@@ -186,7 +186,7 @@ index=main
 
 Figure 2: Aggregated Sysmon Event ID 10 (ProcessAccess) telemetry displaying filtered LSASS access attempts, where baseline system processes have been excluded to surface low-frequency, high-signal anomalies based on GrantedAccess permissions.
 
-![LSASS Process Access Detection](../screenshots/detection11/02_lsass_process_access_filtered.png)
+![LSASS Process Access Detection](screenshots/detection11/02_lsass_process_access_filtered.png)
 
 
 - **What this step does:**\
