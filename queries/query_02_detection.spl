@@ -1,1 +1,28 @@
 
+index=main 
+| search "<EventID>10</EventID>"
+| rex field=_raw "<Data Name='SourceImage'>(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='TargetImage'>(?<TargetImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='GrantedAccess'>(?<GrantedAccess>[^<]+)</Data>"
+| where like(TargetImage,"%lsass.exe")
+
+| eval access_level=case(
+    GrantedAccess=="0x1fffff","HIGH",
+    GrantedAccess=="0x1f3fff","HIGH",
+    GrantedAccess=="0x143a","MEDIUM",
+    GrantedAccess=="0x1410","MEDIUM",
+    GrantedAccess=="0x1010","LOW",
+    GrantedAccess=="0x1000","LOW",
+    true(),"UNKNOWN"
+)
+
+| where NOT (
+    like(SourceImage,"%svchost.exe") OR
+    like(SourceImage,"%VBoxService.exe") OR
+    like(SourceImage,"%MsMpEng.exe") OR
+    like(SourceImage,"%csrss.exe") OR
+    like(SourceImage,"%wininit.exe")
+)
+
+| stats count by SourceImage TargetImage GrantedAccess access_level
+| sort -count
