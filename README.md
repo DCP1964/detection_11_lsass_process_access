@@ -119,7 +119,7 @@ index=main
 ```
 Figure 1: Raw Sysmon Event ID 10 (ProcessAccess) events showing full XML structure, confirming that LSASS access telemetry is successfully ingested and available for detection engineering.
 
-![Raw LSASS Process Access Events](../screenshots/detection11/01_raw_lsass_event10.png)
+![Raw LSASS Process Access Events](screenshots/detection11/01_raw_lsass_event10.png)
 
 - **What this step does:**\
 Retrieves raw Sysmon Event ID 10 logs directly from Splunk without any filtering or field extraction.
