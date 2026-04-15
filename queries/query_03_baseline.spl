@@ -1,1 +1,8 @@
 
+index=main 
+| search "<EventID>10</EventID>"
+| rex field=_raw "<Data Name='SourceImage'>(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='TargetImage'>(?<TargetImage>[^<]+)</Data>"
+| where like(TargetImage,"%lsass.exe")
+| stats count by SourceImage TargetImage
+| sort -count
